@@ -3,31 +3,37 @@ let amigos = [];
 
 function adicionar() {
     let amigo = document.getElementById('nome-amigo');
+    if(amigo.value == ''){
+        alert('Informe o nome do amigo');
+        return;
+    }
+    
+    if(amigos.includes(amigo.value)){
+        alert('Nome já adicinado!');
+        return;
+    }
+
     let lista = document.getElementById('lista-amigos');
-
-
     amigos.push(amigo.value);
-
 
     if (lista.textContent == '') {
         lista.textContent = amigo.value;
     } else {
         lista.textContent = lista.textContent + ', ' + amigo.value;
     }
-
-
     amigo.value = '';
-
-
     atualizarLista();
     atualizarSorteio();
 }
 
 
 function sortear() {
+    if(amigos.length < 4){
+        alert('Adicione pelo menos 4 amigos!')
+        return;
+    }
+
     embaralhar(amigos);
-
-
     let sorteio = document.getElementById('lista-sorteio');
     for (let i = 0; i < amigos.length; i++) {
         if (i == amigos.length - 1) {
